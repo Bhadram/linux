@@ -284,4 +284,43 @@ drv_set_promiscuous_mode(struct ieee802154_local *local, bool on)
 	return ret;
 }
 
+#ifdef CONFIG_PM
+static inline int
+drv_suspend(struct ieee802154_local *local)
+{
+	int ret;
+
+	might_sleep();
+
+	if (!local->ops->suspend) {
+		WARN_ON(1);
+		return -EOPNOTSUPP;
+	}
+
+	trace_802154_drv_suspend(local);
+	ret = local->ops->suspend(&local->hw);
+	trace_802154_drv_return_int(local, ret);
+	return ret;
+}
+
+static inline int
+drv_resume(struct ieee802154_local *local)
+{
+	int ret;
+
+	might_sleep();
+
+	if (!local->ops->resume) {
+		WARN_ON(1);
+		return -EOPNOTSUPP;
+	}
+
+	trace_802154_drv_resume(local);
+	ret = local->ops->resume(&local->hw);
+	trace_802154_drv_return_int(local, ret);
+	return ret;
+}
+
+#endif /* CONFIG_PM */
+
 #endif /* __MAC802154_DRIVER_OPS */

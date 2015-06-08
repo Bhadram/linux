@@ -263,6 +263,16 @@ TRACE_EVENT(802154_drv_set_promiscuous_mode,
 		  BOOL_TO_STR(__entry->on))
 );
 
+DEFINE_EVENT(local_only_evt, 802154_drv_suspend,
+	TP_PROTO(struct ieee802154_local *local),
+	TP_ARGS(local)
+);
+
+DEFINE_EVENT(local_only_evt, 802154_drv_resume,
+	TP_PROTO(struct ieee802154_local *local),
+	TP_ARGS(local)
+);
+
 #endif /* !__MAC802154_DRIVER_TRACE || TRACE_HEADER_MULTI_READ */
 
 #undef TRACE_INCLUDE_PATH

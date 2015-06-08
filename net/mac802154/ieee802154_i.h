@@ -177,4 +177,8 @@ ieee802154_if_add(struct ieee802154_local *local, const char *name,
 		  __le64 extended_addr);
 void ieee802154_remove_interfaces(struct ieee802154_local *local);
 
+/* Suspend and Resume handling */
+int __ieee802154_suspend(struct ieee802154_hw *hw);
+int __ieee802154_resume(struct ieee802154_hw *hw);
+
 #endif /* __IEEE802154_I_H */

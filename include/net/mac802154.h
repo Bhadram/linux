@@ -247,6 +247,8 @@ struct ieee802154_ops {
 					     s8 retries);
 	int             (*set_promiscuous_mode)(struct ieee802154_hw *hw,
 						const bool on);
+	int		(*suspend)(struct ieee802154_hw *hw);
+	int		(*resume)(struct ieee802154_hw *hw);
 };
 
 /**
